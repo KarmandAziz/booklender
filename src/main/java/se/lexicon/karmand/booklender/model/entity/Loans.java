@@ -1,9 +1,12 @@
 package se.lexicon.karmand.booklender.model.entity;
 
+import jdk.vm.ci.meta.Local;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Objects;
 
 @Entity
@@ -28,29 +31,42 @@ public class Loans {
     )
     @JoinColumn(name = "fk_books_id")
     private Books books;
+    private LocalDate loanDate;
+
+    public Loans(String id, boolean concluded, LibraryUser loanTaker, Books books, LocalDate loanDate) {
+        this.id = id;
+        this.concluded = concluded;
+        this.loanTaker = loanTaker;
+        this.books = books;
+        this.loanDate = loanDate;
+    }
 
     public Loans() {
     }
 
-
     public boolean isOverdue(){
-        LocalDate
+        LocalDate dueDate = loanDate.plusDays(books.getMaxLoanDays());
+        boolean isOverdue = LocalDate.now().isAfter(dueDate);
+        return isOverdue;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Loans loans = (Loans) o;
-        return concluded == loans.concluded;
+    public BigDecimal getFine(){
+        Period p = Period.between(loanDate.plusDays(books.getMaxLoanDays()), LocalDate.now());
+        int d = p.getDays();
+        BigDecimal fine = BigDecimal.ZERO;
+        if(d > 0){
+            fine = BigDecimal.valueOf(d * books.getFinePerDay().longValue());
+        }
+        return fine;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(concluded);
+    public boolean extendLoan(){
+        if(books.isReserved() || isOverdue()){
+            return false;
+        }
+        this.loanDate = LocalDate.now();
+        return true;
     }
-
-
 
     public String getId() {
         return id;
@@ -76,7 +92,6 @@ public class Loans {
         this.loanTaker = loanTaker;
     }
 
-
     public Books getBooks() {
         return books;
     }
@@ -85,10 +100,33 @@ public class Loans {
         this.books = books;
     }
 
+    public LocalDate getLoanDate() {
+        return loanDate;
+    }
+
+    public void setLoanDate(LocalDate loanDate) {
+        this.loanDate = loanDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Loans loans = (Loans) o;
+        return concluded == loans.concluded && Objects.equals(id, loans.id) && Objects.equals(loanDate, loans.loanDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, concluded, loanDate);
+    }
+
     @Override
     public String toString() {
-        return "Loan{" +
-                "isTerminated=" + concluded +
+        return "Loans{" +
+                "id='" + id + '\'' +
+                ", concluded=" + concluded +
+                ", loanDate=" + loanDate +
                 '}';
     }
 }
