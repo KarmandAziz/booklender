@@ -60,8 +60,6 @@ public class EntityToDTOConverter implements DTOService{
         loansDTO.setLoanId(loans.getLoansId());
         loansDTO.setLoanDate(loans.getLoanDate());
         loansDTO.setConcluded(loans.isConcluded());
-        loansDTO.setLoanTaker(toLibraryUserDTO(loans.getLoanTaker()));
-        loansDTO.setBooks(toBooksDTO(loans.getBooks()));
         return loansDTO;
     }
 }
