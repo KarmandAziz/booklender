@@ -5,10 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import se.lexicon.karmand.booklender.model.entity.Books;
 
-import java.awt.print.Book;
 import java.util.List;
 
-public interface BookDAO extends JpaRepository<Books, String> {
+public interface BooksDAO extends JpaRepository<Books, String> {
 
     @Query("SELECT b FROM Books b WHERE b.isAvailable = :isAvailable")
     List<Books> findByAvailableStatus(@Param("isAvailable") boolean isAvailable);
