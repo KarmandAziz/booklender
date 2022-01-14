@@ -22,7 +22,6 @@ public class LibraryUser {
     @Column(unique = true)
     private String email;
 
-
     public LibraryUser() {
     }
 
@@ -59,17 +58,12 @@ public class LibraryUser {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LibraryUser that = (LibraryUser) o;
-        return Objects.equals(regDate, that.regDate) && Objects.equals(name, that.name) && Objects.equals(email, that.email);
+    public String toString() {
+        return "LibraryUser{" +
+                "id='" + id + '\'' +
+                ", regDate=" + regDate +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(regDate, name, email);
-    }
-
-
 }

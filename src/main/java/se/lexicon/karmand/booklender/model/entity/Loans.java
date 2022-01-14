@@ -1,6 +1,5 @@
 package se.lexicon.karmand.booklender.model.entity;
 
-import jdk.vm.ci.meta.Local;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -23,13 +22,13 @@ public class Loans {
             cascade = {CascadeType.DETACH, CascadeType.REFRESH},
             fetch = FetchType.LAZY
     )
-    @JoinColumn(name = "fk_loanTaker_id")
+    @JoinColumn(name = "fk_loanTaker")
     private LibraryUser loanTaker;
     @ManyToOne(
             cascade = {CascadeType.DETACH, CascadeType.REFRESH},
             fetch = FetchType.LAZY
     )
-    @JoinColumn(name = "fk_books_id")
+    @JoinColumn(name = "fk_books")
     private Books books;
     private LocalDate loanDate;
 
@@ -108,18 +107,6 @@ public class Loans {
         this.loanDate = loanDate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Loans loans = (Loans) o;
-        return concluded == loans.concluded && Objects.equals(id, loans.id) && Objects.equals(loanDate, loans.loanDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, concluded, loanDate);
-    }
 
     @Override
     public String toString() {

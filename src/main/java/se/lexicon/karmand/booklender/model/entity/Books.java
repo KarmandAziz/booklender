@@ -48,19 +48,6 @@ public class Books {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Books books = (Books) o;
-        return maxLoanDays == books.maxLoanDays && isAvailable == books.isAvailable && isReserved == books.isReserved && Objects.equals(titles, books.titles) && Objects.equals(finePerDay, books.finePerDay) && Objects.equals(description, books.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(titles, maxLoanDays, finePerDay, description, isAvailable, isReserved);
-    }
-
     public String getId() {
         return id;
     }
