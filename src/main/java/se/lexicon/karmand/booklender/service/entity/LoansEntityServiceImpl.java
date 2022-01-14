@@ -4,9 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.karmand.booklender.data.dao.LoansDAO;
 import se.lexicon.karmand.booklender.exception.AppResourceNotFoundException;
-import se.lexicon.karmand.booklender.model.dto.LoansDTO;
 import se.lexicon.karmand.booklender.model.entity.Loans;
-import se.lexicon.karmand.booklender.model.forms.BooksForm;
 import se.lexicon.karmand.booklender.model.forms.LoansForm;
 
 import java.util.List;
@@ -14,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class LoansEntityServiceImpl implements LoansEntityService{
+public class LoansEntityServiceImpl implements LoansEntityService {
 
     private final LoansDAO loansDAO;
     private final BooksEntityService booksEntityService;
@@ -29,7 +27,7 @@ public class LoansEntityServiceImpl implements LoansEntityService{
 
     @Override
     public Loans create(LoansForm loansForm) {
-        if(loansForm == null) throw new IllegalArgumentException("loansForm was null");
+        if (loansForm == null) throw new IllegalArgumentException("loansForm was null");
         Loans loans = new Loans();
         loans.setLoansId(loansForm.getLoansId());
         loans.setLoanDate(loansForm.getLoanDate());
@@ -41,7 +39,7 @@ public class LoansEntityServiceImpl implements LoansEntityService{
     @Override
     public Loans findById(String id) {
         return loansDAO.findById(id)
-                .orElseThrow(() -> new AppResourceNotFoundException("Could not find loans with id " +id));
+                .orElseThrow(() -> new AppResourceNotFoundException("Could not find loans with id " + id));
     }
 
     @Override
@@ -52,8 +50,8 @@ public class LoansEntityServiceImpl implements LoansEntityService{
     @Override
     public Loans update(String id, LoansForm loansForm) {
         Loans loans = findById(id);
-        if(!id.equals(loansForm.getLoansId())){
-            throw new IllegalArgumentException("Id didn't match found " + LoansForm.class.getName()+".id");
+        if (!id.equals(loansForm.getLoansId())) {
+            throw new IllegalArgumentException("Id didn't match found " + LoansForm.class.getName() + ".id");
         }
         loans.setLoansId(loansForm.getLoansId());
         loans.setLoanDate(loansForm.getLoanDate());
@@ -73,8 +71,8 @@ public class LoansEntityServiceImpl implements LoansEntityService{
     }
 
     @Override
-    public Optional<Loans> findByLoansId(String loansId) {
-        return loansDAO.findByLoansId(loansId);
+    public Optional<Loans> findByUserId(String userId) {
+        return loansDAO.findByUserId(userId);
     }
 
     @Override
@@ -85,5 +83,15 @@ public class LoansEntityServiceImpl implements LoansEntityService{
     @Override
     public List<Loans> findByTerminatedStatus(boolean concluded) {
         return loansDAO.findByTerminatedStatus(concluded);
+    }
+
+    public Loans concludeLoan(String id, String userid) {
+        Loans loan = findById(id);
+        if (userid.equals(loan.getLoanTaker().getUserId())) {
+            loan.setConcluded(true);
+            return loansDAO.save(loan);
+        } else {
+            throw new IllegalArgumentException("userId did not match id of loanTaker");
+        }
     }
 }

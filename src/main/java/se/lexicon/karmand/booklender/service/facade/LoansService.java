@@ -12,6 +12,6 @@ public interface LoansService extends GenericEntityService<LoansDTO, LoansForm> 
     List<LoansDTO> findByLoanTakerId(String userId);
     List<LoansDTO> findByBookId(String bookId);
     List<LoansDTO> findByTerminated(boolean isTerminated);
-    Boolean conclude(String loanId);
+
 
 }

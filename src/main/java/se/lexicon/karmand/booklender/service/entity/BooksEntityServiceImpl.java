@@ -72,6 +72,8 @@ public class BooksEntityServiceImpl implements BooksEntityService{
         return booksDAO.findByAvailableStatus(isAvailable);
     }
 
+
+
     @Override
     public List<Books> findByReservedStatus(boolean isReserved) {
         return booksDAO.findByReservedStatus(isReserved);
