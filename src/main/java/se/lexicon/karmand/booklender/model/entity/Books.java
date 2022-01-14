@@ -2,14 +2,12 @@ package se.lexicon.karmand.booklender.model.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
+@Table(name = "books")
 public class Books {
     @Id
     @GeneratedValue(generator = "UUID")
