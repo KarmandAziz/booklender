@@ -28,12 +28,12 @@ public class LibraryUserController {
         return ResponseEntity.ok(libraryUserService.findById(id));
     }
 
-    @GetMapping("api/v1/library_users/search_email")
+    @GetMapping("/api/v1/library_users/search_email")
     public ResponseEntity <List<LibraryUserDTO>> findByEmail(@PathVariable("email") String email) {
         return ResponseEntity.ok().body(libraryUserService.findByEmail(email));
     }
 
-    @GetMapping("api/v1/library_users")
+    @GetMapping("/api/v1/library_users/find_all")
     public ResponseEntity<List<LibraryUserDTO>> findAll() {
         return ResponseEntity.ok().body(libraryUserService.findAll());
     }
