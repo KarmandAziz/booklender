@@ -1,13 +1,16 @@
 package se.lexicon.karmand.booklender.service.entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.karmand.booklender.data.dao.BooksDAO;
 import se.lexicon.karmand.booklender.exception.AppResourceNotFoundException;
 import se.lexicon.karmand.booklender.model.entity.Books;
 import se.lexicon.karmand.booklender.model.forms.BooksForm;
 
 import java.util.List;
-
+@Service
+@Transactional
 public class BooksEntityServiceImpl implements BooksEntityService{
 
     private final BooksDAO booksDAO;

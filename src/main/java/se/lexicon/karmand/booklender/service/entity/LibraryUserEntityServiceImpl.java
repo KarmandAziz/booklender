@@ -1,6 +1,8 @@
 package se.lexicon.karmand.booklender.service.entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.karmand.booklender.data.dao.LibraryUserDAO;
 import se.lexicon.karmand.booklender.exception.AppResourceNotFoundException;
 import se.lexicon.karmand.booklender.model.entity.LibraryUser;
@@ -9,7 +11,8 @@ import se.lexicon.karmand.booklender.model.forms.LibraryUserForm;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
+@Transactional
 public class LibraryUserEntityServiceImpl implements LibraryUserEntityService {
 
     private LibraryUserDAO libraryUserDAO;
