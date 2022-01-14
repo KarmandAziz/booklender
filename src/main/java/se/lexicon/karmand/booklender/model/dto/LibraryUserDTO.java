@@ -3,14 +3,14 @@ package se.lexicon.karmand.booklender.model.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class LibraryUserDto implements Serializable {
+public class LibraryUserDTO implements Serializable {
 
     private String userId;
     private LocalDate regDate;
     private String name;
     private String email;
 
-    public LibraryUserDto() {
+    public LibraryUserDTO() {
     }
 
 

@@ -1,15 +1,13 @@
 package se.lexicon.karmand.booklender.service.facade;
 
-import se.lexicon.karmand.booklender.model.dto.BooksDTO;
-import se.lexicon.karmand.booklender.model.dto.LibraryUserDto;
+import se.lexicon.karmand.booklender.model.dto.LibraryUserDTO;
+import se.lexicon.karmand.booklender.model.forms.LibraryUserForm;
 import se.lexicon.karmand.booklender.service.GenericEntityService;
 
-import java.util.List;
+public interface LibraryUserService extends GenericEntityService<LibraryUserDTO, LibraryUserForm> {
 
-public interface LibraryUserService extends GenericEntityService<LibraryUserDto, String> {
-
-    LibraryUserDto findById(int userId);
-    LibraryUserDto findByEmail(String email);
+    LibraryUserDTO findById(int userId);
+    LibraryUserDTO findByEmail(String email);
 
 
 

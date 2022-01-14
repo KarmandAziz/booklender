@@ -1,7 +1,6 @@
 package se.lexicon.karmand.booklender.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import se.lexicon.karmand.booklender.model.entity.Books;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,7 +9,7 @@ public class LoansDTO implements Serializable {
 
     private String loanId;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private LibraryUserDto loanTaker;
+    private LibraryUserDTO loanTaker;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private BooksDTO books;
     private LocalDate loanDate;
@@ -27,11 +26,11 @@ public class LoansDTO implements Serializable {
         this.loanId = loanId;
     }
 
-    public LibraryUserDto getLoanTaker() {
+    public LibraryUserDTO getLoanTaker() {
         return loanTaker;
     }
 
-    public void setLoanTaker(LibraryUserDto loanTaker) {
+    public void setLoanTaker(LibraryUserDTO loanTaker) {
         this.loanTaker = loanTaker;
     }
 

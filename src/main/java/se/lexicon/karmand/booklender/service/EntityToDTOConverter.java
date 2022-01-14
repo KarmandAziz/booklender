@@ -3,14 +3,11 @@ package se.lexicon.karmand.booklender.service;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.karmand.booklender.model.dto.BooksDTO;
-import se.lexicon.karmand.booklender.model.dto.LibraryUserDto;
+import se.lexicon.karmand.booklender.model.dto.LibraryUserDTO;
 import se.lexicon.karmand.booklender.model.dto.LoansDTO;
 import se.lexicon.karmand.booklender.model.entity.Books;
 import se.lexicon.karmand.booklender.model.entity.LibraryUser;
 import se.lexicon.karmand.booklender.model.entity.Loans;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @Transactional
@@ -32,9 +29,9 @@ public class EntityToDTOConverter implements DTOService{
 
 
     @Override
-    public LibraryUserDto toLibraryUserDTO(LibraryUser libraryUser) {
+    public LibraryUserDTO toLibraryUserDTO(LibraryUser libraryUser) {
         if(libraryUser == null) return null;
-        LibraryUserDto libraryUserDto = new LibraryUserDto();
+        LibraryUserDTO libraryUserDto = new LibraryUserDTO();
         libraryUserDto.setUserId(libraryUser.getUserId());
         libraryUserDto.setEmail(libraryUser.getEmail());
         libraryUserDto.setName(libraryUser.getName());
