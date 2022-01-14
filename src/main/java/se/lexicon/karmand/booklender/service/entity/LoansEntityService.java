@@ -12,6 +12,7 @@ public interface LoansEntityService extends GenericEntityService<Loans, LoansFor
     Optional<Loans> findByUserId(String userId);
     Optional<Loans> findByBooksId(String booksId);
     List<Loans> findByTerminatedStatus(boolean concluded);
+    Loans concludeLoan(String id, String userid);
 
 
 }

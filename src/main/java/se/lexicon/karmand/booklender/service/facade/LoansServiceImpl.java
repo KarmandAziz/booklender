@@ -71,5 +71,12 @@ public class LoansServiceImpl implements LoansService{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public LoansDTO concludeLoan(String id, String userId) {
+        return dtoService.toFullLoansDTO(
+                loansEntityService.concludeLoan(id, userId)
+        );
+    }
+
 
 }
