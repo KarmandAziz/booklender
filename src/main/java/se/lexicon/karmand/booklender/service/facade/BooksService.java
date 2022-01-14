@@ -5,7 +5,7 @@ import se.lexicon.karmand.booklender.service.GenericEntityService;
 
 import java.util.List;
 
-public interface BooksService extends GenericEntityService<BooksDTO, String> {
+public interface BooksService {
 
     BooksDTO findById(String bookId);
     List<BooksDTO> findByTitle(String title);

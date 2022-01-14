@@ -8,11 +8,10 @@ import se.lexicon.karmand.booklender.model.entity.LibraryUser;
 import se.lexicon.karmand.booklender.model.entity.Loans;
 
 public interface DTOService {
-    BooksDTO toFullBooksDTO(Books books);
-    BooksDTO toSmallBooksDTO(Books books);
+    BooksDTO toBooksDTO(Books books);
 
-    LibraryUserDto toFullLibraryUserDTO(LibraryUser libraryUser);
-    LibraryUserDto toSmallLibraryUserDTO(LibraryUser libraryUser);
+    LibraryUserDto toLibraryUserDTO(LibraryUser libraryUser);
+
 
     LoansDTO toFullLoansDTO(Loans loans);
     LoansDTO toSmallLoansDTO(Loans loans);
