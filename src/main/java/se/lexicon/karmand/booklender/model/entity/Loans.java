@@ -6,17 +6,18 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Objects;
+
+import static se.lexicon.karmand.booklender.constants.EntityConstants.GENERATOR;
+import static se.lexicon.karmand.booklender.constants.EntityConstants.UUID_GENERATOR;
 
 @Entity
 @Table(name = "loans")
 public class Loans {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(updatable = false)
-    private String id;
+    @GeneratedValue(generator = GENERATOR)
+    @GenericGenerator(name = GENERATOR, strategy = UUID_GENERATOR)
+    private String loansId;
     private boolean concluded;
     @ManyToOne(
             cascade = {CascadeType.DETACH, CascadeType.REFRESH},
@@ -32,8 +33,8 @@ public class Loans {
     private Books books;
     private LocalDate loanDate;
 
-    public Loans(String id, boolean concluded, LibraryUser loanTaker, Books books, LocalDate loanDate) {
-        this.id = id;
+    public Loans(String loansId, boolean concluded, LibraryUser loanTaker, Books books, LocalDate loanDate) {
+        this.loansId = loansId;
         this.concluded = concluded;
         this.loanTaker = loanTaker;
         this.books = books;
@@ -67,12 +68,12 @@ public class Loans {
         return true;
     }
 
-    public String getId() {
-        return id;
+    public String getLoansId() {
+        return loansId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setLoansId(String id) {
+        this.loansId = id;
     }
 
     public boolean isConcluded() {
@@ -111,7 +112,7 @@ public class Loans {
     @Override
     public String toString() {
         return "Loans{" +
-                "id='" + id + '\'' +
+                "id='" + loansId + '\'' +
                 ", concluded=" + concluded +
                 ", loanDate=" + loanDate +
                 '}';

@@ -4,16 +4,18 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Objects;
+
+import static se.lexicon.karmand.booklender.constants.EntityConstants.GENERATOR;
+import static se.lexicon.karmand.booklender.constants.EntityConstants.UUID_GENERATOR;
 
 @Entity
 @Table(name = "books")
 public class Books {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(generator = GENERATOR)
+    @GenericGenerator(name = GENERATOR, strategy = UUID_GENERATOR)
     @Column(updatable = false)
-    private String id;
+    private String booksId;
     private String titles;
     private int maxLoanDays;
     private BigDecimal finePerDay;
@@ -24,8 +26,8 @@ public class Books {
     public Books() {
     }
 
-    public Books(String id, String titles, int maxLoanDays, BigDecimal finePerDay, String description, boolean isAvailable, boolean isReserved) {
-        this.id = id;
+    public Books(String booksId, String titles, int maxLoanDays, BigDecimal finePerDay, String description, boolean isAvailable, boolean isReserved) {
+        this.booksId = booksId;
         this.titles = titles;
         this.maxLoanDays = maxLoanDays;
         this.finePerDay = finePerDay;
@@ -46,12 +48,12 @@ public class Books {
                 '}';
     }
 
-    public String getId() {
-        return id;
+    public String getBooksId() {
+        return booksId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setBooksId(String id) {
+        this.booksId = id;
     }
 
     public String getTitles() {

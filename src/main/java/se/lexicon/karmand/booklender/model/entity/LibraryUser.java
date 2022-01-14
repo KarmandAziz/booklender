@@ -2,21 +2,20 @@ package se.lexicon.karmand.booklender.model.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.annotation.ManagedBean;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Objects;
-import java.util.Set;
+
+import static se.lexicon.karmand.booklender.constants.EntityConstants.GENERATOR;
+import static se.lexicon.karmand.booklender.constants.EntityConstants.UUID_GENERATOR;
 
 @Entity
 @Table(name = "libraryUser")
 public class LibraryUser {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(updatable = false)
-    private String id;
+    @GeneratedValue(generator = GENERATOR)
+    @GenericGenerator(name = GENERATOR, strategy = UUID_GENERATOR)
+    private String userId;
     private LocalDate regDate;
     private String name;
     @Column(unique = true)
@@ -26,18 +25,18 @@ public class LibraryUser {
     }
 
     public LibraryUser(String id, LocalDate regDate, String name, String email) {
-        this.id = id;
+        this.userId = id;
         this.regDate = regDate;
         this.name = name;
         this.email = email;
     }
 
-    public String getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserId(String id) {
+        this.userId = id;
     }
 
     public LocalDate getRegDate() {
@@ -67,7 +66,7 @@ public class LibraryUser {
     @Override
     public String toString() {
         return "LibraryUser{" +
-                "id='" + id + '\'' +
+                "id='" + userId + '\'' +
                 ", regDate=" + regDate +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
