@@ -48,7 +48,7 @@ public class LibraryUserController {
         libraryUserService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
+    @PutMapping("/api/v1/users/{id}")
     public ResponseEntity<LibraryUserDTO> update(@PathVariable("id") String id, @Validated(OnPut.class) @RequestBody LibraryUserForm libraryUserForm){
         return ResponseEntity.ok(libraryUserService.update(id, libraryUserForm));
     }
